@@ -7,18 +7,15 @@ public class WashingMachine {
 	@JsonIgnore
 	int id;
 
-	@JsonProperty("maxcloths")
-	int maxCloths;
-	
 	@JsonIgnore
 	int cloth;
-	
+
 	@JsonIgnore
 	String state;
-	
+
 	@JsonProperty("washingmachinename")
 	String name;
-	
+
 	@JsonProperty("washingmachineregister")
 	String registerId;
 
@@ -28,14 +25,6 @@ public class WashingMachine {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getMaxCloths() {
-		return maxCloths;
-	}
-
-	public void setMaxCloths(int maxCloths) {
-		this.maxCloths = maxCloths;
 	}
 
 	public int getCloth() {
@@ -72,10 +61,10 @@ public class WashingMachine {
 
 	@Override
 	public String toString() {
-		return "WashingMachine [id=" + id + ", maxCloths=" + maxCloths + ", cloth=" + cloth + ", state=" + state
-				+ ", name=" + name + ", registerId=" + registerId + "]\n";
+		return "WashingMachine [id=" + id + ", cloth=" + cloth + ", state=" + state + ", name=" + name + ", registerId="
+				+ registerId + "]";
 	}
-	
+
 	
 
 }

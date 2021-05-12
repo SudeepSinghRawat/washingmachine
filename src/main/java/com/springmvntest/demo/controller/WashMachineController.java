@@ -28,20 +28,32 @@ public class WashMachineController {
 	@GetMapping(value = "api/washing-machines/{washingMachineId}")
 	public ResponseEntity<Object> getWachingMachine(@PathVariable  int washingMachineId) {
 		System.out.println(washingMachineId);
-		return new ResponseEntity<Object>(washingMachineId, HttpStatus.ACCEPTED);
+		try {
+			WashingMachine machine = wsServices.getWashingMachine(washingMachineId);
+			return new ResponseEntity<Object>(machine, HttpStatus.ACCEPTED);
+		} catch (IllegalAccessException e) {
+			return new ResponseEntity<Object>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 
 	@PostMapping(value = "api/washing-machines")
 	public ResponseEntity<Object> saveWashingMachine(@RequestBody WashingMachine washingMachine) {
 		System.out.println("inside save washineMachine controller");
 		
-		return new ResponseEntity<Object>(wsServices.addWashingMachine(washingMachine), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Object>(wsServices.addWashingMachine(washingMachine), HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value = "api/washing-machines/{washingMachineId}/{status}")
 	public ResponseEntity<Object> washMachineStatus( @PathVariable int washingMachineId, @PathVariable String status){
-		System.out.println(washingMachineId+ " "+ status);
-		return new ResponseEntity<Object>(washingMachineId+" "+status, HttpStatus.ACCEPTED);
+		//System.out.println(washingMachineId+ " "+ status);
+	 	try {
+			String state =  wsServices.doCalcuation(washingMachineId, status);
+			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+		} catch (IllegalAccessException e) {
+			return new ResponseEntity<Object>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}	
+		
 	}
 
 }
